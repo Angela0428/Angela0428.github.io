@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Angela Chen</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../dist/output.css" rel="stylesheet" />
+    <script src="/dist/output.js"></script>
+    <script src="navBar.js"></script>
+    <script src="header.js"></script>
+    <script src="./helpers/fetch.js"></script>
+    <script src="./helpers/experience.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="./helpers/aboutStyles.css" />
+  </head>
+
+  <body x-data="navbar()" class="bg-slate-800 font-mono">
+    <nav class="border-b-4 border-teal-400 text-lg text-teal-400">
+      <div
+        class="container mx-auto flex items-center justify-between px-4 py-3 lg:px-6"
+      >
+        <div class="w-1/3">
+          <a href="#" class="text-lg hover:opacity-40">./angelaChen</a>
+        </div>
+        <div class="hidden w-2/3 md:flex md:items-center md:justify-end">
+          <template x-for="item in entries">
+            <ul class="font-mono hover:opacity-40">
+              <a :href="item.url" style="padding: 1em">
+                <span class="text-teal-400" x-text="'0'+item.id+'.'"></span>
+                <span
+                  class="text-slate-200 hover:text-slate-300"
+                  x-text="item.label"
+                ></span>
+              </a>
+            </ul>
+          </template>
+        </div>
+        <div class="md:hidden">
+          <button
+            @click="isOpen = !isOpen"
+            class="border-1 flex items-center rounded-md px-3 py-2 opacity-40 hover:opacity-20 md:hidden"
+          >
+            <img
+              class="object-slate-400 mr-2 h-5 w-5 border-collapse"
+              :src="isOpen ? 'assets/icons/close.svg' : 'assets/icons/menu.svg'"
+              alt="Menu button toggle"
+            />
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="md:hidden">
+      <div class="container mx-auto py-3">
+        <template x-for="item in entries">
+          <ul x-show="isOpen" class="font-mono hover:opacity-40">
+            <a :href="item.url" style="padding: 1em">
+              <span class="text-teal-400" x-text="'0'+item.id+'.'"></span>
+              <span
+                class="text-slate-400 hover:text-slate-300"
+                x-text="item.label"
+              ></span>
+            </a>
+          </ul>
+        </template>
+      </div>
+    </div>
+
+    <header class="flex flex-col p-2 px-10 py-10 md:flex-row-reverse">
+      <div class="">
+        <img
+          src="assets/images/selfie.JPG"
+          class="object-fill md:h-auto"
+          alt="Resume picture"
+        />
+      </div>
+      <div class="">
+        <div class="">
+          <h1 class="text-lg text-teal-400">Hey, my name is</h1>
+          <h2 class="py-3 text-3xl text-slate-300 lg:text-5xl">Angela Chen</h2>
+          <h3 class="py-3 pb-9 text-slate-300 md:w-1/2">
+            I am a
+            <spam class="text-teal-400">Computer Science student</spam> with a
+            passion to develop and figure out every project. I have a
+            <spam class="text-teal-400">Business Administration Degree </spam>
+            in National Taipei University of Business, and I've led a online
+            dessert stop with packaging, sell model, and advertising. I made it
+            become an online and physical dessert shop. Although I was in
+            business industry, I'm learning technology as my second degree. I
+            want to
+            <spam class="text-teal-400">combine business and technology</spam>
+            to make everything more convenient. I am always motivated by the
+            challenge of creating something new and impactful.
+          </h3>
+
+          <div class="text-center">
+            <button
+              class="flex w-full items-center justify-center rounded border border-teal-400 p-4 text-slate-300 hover:bg-teal-800 md:w-auto lg:px-6"
+              onclick="downloadFile('./assets/files/resume.pdf')"
+            >
+              <span class="mr-2"> Download my resume</span>
+              <img
+                src="assets/icons/download.svg"
+                class="mr-2 w-4"
+                alt="icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="about-section" id="about">
+      <div class="relative flex items-center py-5">
+        <h2 class="text-teal-400">02</h2>
+        <h2 class="px-2 text-center text-2xl font-bold">about</h2>
+        <div class="flex-grow border border-dashed border-teal-400"></div>
+        <!--TODO:// Calculate the width of screen, and add the limiter that populates the whole screen -->
+      </div>
+      <div class="flex flex-col md:flex-row-reverse">
+        <div class="relative mb-8 md:mb-auto md:ml-24">
+          <img src="assets/images/daily.JPG" alt="Enjoy delicacy." />
+          <svg
+            class="absolute -right-4 top-4 -z-10 mb-8 flex h-full w-full bg-teal-400"
+          ></svg>
+        </div>
+        <p class="">
+          I am a
+          <spam class="text-teal-400">Computer Science student</spam> with a
+          passion to develop and figure out every project. I have a
+          <spam class="text-teal-400">Business Administration Degree </spam> in
+          National Taipei University of Business, and I've led a online dessert
+          stop with packaging, sell model, and advertising. I made it become an
+          online and physical dessert shop. Although I was in business industry,
+          I'm learning technology as my second degree. I want to
+          <spam class="text-teal-400">combine business and technology</spam> to
+          make everything more convenient. I am always motivated by the
+          challenge of creating something new and impactful.
+        </p>
+        <p class="text-justify">
+          My design thinking skills are always on point and creative, thanks to
+          my background in both business and engineering. I understand that a
+          great product is about more than just the technology; it's about
+          creating a user experience that is intuitive, efficient, and
+          delightful. Whether I'm working with a team of developers, product
+          managers, or designers, I bring a focus on empathy and collaboration
+          to every project. When I have free time, you can find me take a trip,
+          baking, and play some music together. They are something make me enjoy
+          and proud myself. Rest well makes me more energy and creative in my
+          study and job.
+        </p>
+      </div>
+    </section>
+
+    <section
+      x-data="skills()"
+      x-init="load()"
+      id="skills"
+      class="pb-20 text-slate-300"
+    >
+      <div class="relative flex items-center px-10 py-5">
+        <h2 class="text-xl text-teal-400">03</h2>
+        <h2 class="px-2 text-center text-xl text-slate-100">Skills</h2>
+        <div class="flex-grow border border-dashed border-teal-400"></div>
+      </div>
+
+      <div class="px-10 py-2 text-lg">
+        <p>
+          Language: Mandarin, Taiwanese-native, English-high intermediate,
+          French-beginner Coding: HTML, CSS, Java, JavaScript, Node.JS
+          Office360: Word, Excel, PowerPoint Soft skills: Problem-Solving,
+          Public Speaking
+        </p>
+      </div>
+      <div
+        class="w-3/2 flex flex flex-row flex-col p-2 px-10 py-10 md:flex-row-reverse"
+      >
+        <template x-for="language in languages">
+          <div class="max-w-screen overflow-hidden px-3 py-3">
+            <div
+              class="border border-teal-400 bg-slate-900 hover:shadow-lg hover:shadow-cyan-500/50"
+            >
+              <div class="flex items-center py-4">
+                <img
+                  class="mr-2 h-12 w-12 scale-125 pl-2"
+                  :src="language.path"
+                  alt="Logo"
+                />
+              </div>
+              <h3
+                class="mb-2 pl-3 text-lg font-medium"
+                x-text="language.language"
+              ></h3>
+
+              <div class="font-base py-5 pl-3">
+                <p>I want to leave it blank lol</p>
+              </div>
+
+              <div class="m-auto h-7 w-11/12 bg-gray-500">
+                <div
+                  class="h-full w-4/5 bg-teal-700"
+                  :style="'width:' + language.percentage"
+                ></div>
+              </div>
+
+              <div class="m-auto flex items-center py-4 pb-9 pl-3 text-center">
+                <p
+                  class="text-2xl font-bold text-slate-300"
+                  x-text="language.hours"
+                ></p>
+                <p class="pl-1 text-2xl font-bold text-slate-300">h</p>
+                <p class="pl-1 text-slate-500">/1000h</p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <section
+      id="experience"
+      class="flex flex-col justify-start gap-[0.625rem] px-4 pb-16 pt-8 md:px-8"
+    >
+      <h2 class="flex flex-row items-center gap-4 py-4">
+        <span
+          class="order-0 flex items-center text-center font-mono text-xl text-teal-400"
+          >04</span
+        >
+        <span
+          class="order-1 flex items-center text-center font-mono text-xl text-slate-100"
+        >
+          Experience</span
+        >
+        <span
+          class="flex-grow-1 order-2 flex w-full border border-dashed border-teal-500"
+        ></span>
+      </h2>
+      <div class="flex flex-col">
+        <template x-data="experience()" x-for="j in jobs">
+          <div class="flex flex-row gap-8">
+            <div class="flex w-[1.5625rem] flex-col items-center">
+              <svg
+                width="25"
+                height="25"
+                viewBox="0 0 25 25"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect
+                  x="4"
+                  y="12.3333"
+                  width="11.7851"
+                  height="11.7851"
+                  transform="rotate(-45 4 12.3333)"
+                  fill="#8892C0"
+                />
+                <rect
+                  x="1.41421"
+                  y="12.5"
+                  width="15.6777"
+                  height="15.6777"
+                  transform="rotate(-45 1.41421 12.5)"
+                  stroke="#64FFDA"
+                  stroke-width="2"
+                />
+              </svg>
+              <div
+                class="box-border h-full w-[0.0625rem] border-[0.0625rem] border-l border-dashed border-teal-500"
+              ></div>
+            </div>
+            <div class="flex flex-col gap-[1.125rem] pb-8">
+              <div class="flex flex-col gap-1">
+                <h3
+                  class="font-mono text-lg text-slate-200"
+                  x-text="j.title"
+                ></h3>
+                <p class="text-sm text-slate-400" x-text="j.date"></p>
+              </div>
+              <div
+                class="flex flex-col gap-2 font-mono text-base text-slate-300"
+              >
+                <p x-text="j.description"></p>
+                <p x-text="j.duties"></p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <section
+      id="contact"
+      class="border-t border-t-teal-400 px-8 py-16 text-slate-300"
+    >
+      <div class="text-center">
+        <h1 class="sm:text-sm, md:text-5xl">
+          <span class="text-slate-300">Let's Work</span>
+          <span class="text-teal-400">Together</span>
+        </h1>
+        <a href="mailto:pic477@ensign.edu" class="text-slate-300 underline"
+          >ispic477@ensign.edu</a
+        >
+        <p class="mt-2 text-slate-300">Based in Salt Lake City, UT</p>
+        <div class="mt-4 flex justify-center space-x-4">
+          <a
+            href="https://www.linkedin.com/in/ping-chi-chen-956854252/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="object-slate-300 mr-2 h-10 w-10 border-collapse"
+              src="assets/icons/linkedin.svg"
+              alt="Menu button toggle"
+            />
+          </a>
+
+          <a
+            href="https://github.com/Angela0428"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="object-slate-300 mr-2 h-10 w-10 border-collapse"
+              src="assets/icons/github.svg"
+              alt="Menu button toggle"
+            />
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
