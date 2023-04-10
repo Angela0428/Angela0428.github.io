@@ -152,70 +152,35 @@
       </div>
     </section>
 
-    <section
-      x-data="skills()"
-      x-init="load()"
-      id="skills"
-      class="pb-20 text-slate-300"
-    >
-      <div class="relative flex items-center px-10 py-5">
-        <h2 class="text-xl text-teal-400">03</h2>
-        <h2 class="px-2 text-center text-xl text-slate-100">Skills</h2>
-        <div class="flex-grow border border-dashed border-teal-400"></div>
-      </div>
-
-      <div class="px-10 py-2 text-lg">
-        <p>
-          Language: Mandarin, Taiwanese-native, English-high intermediate,
-          French-beginner Coding: HTML, CSS, Java, JavaScript, Node.JS
-          Office360: Word, Excel, PowerPoint Soft skills: Problem-Solving,
-          Public Speaking
-        </p>
-      </div>
-      <div
-        class="w-3/2 flex flex flex-row flex-col p-2 px-10 py-10 md:flex-row-reverse"
-      >
-        <template x-for="language in languages">
-          <div class="max-w-screen overflow-hidden px-3 py-3">
-            <div
-              class="border border-teal-400 bg-slate-900 hover:shadow-lg hover:shadow-cyan-500/50"
-            >
-              <div class="flex items-center py-4">
-                <img
-                  class="mr-2 h-12 w-12 scale-125 pl-2"
-                  :src="language.path"
-                  alt="Logo"
-                />
-              </div>
-              <h3
-                class="mb-2 pl-3 text-lg font-medium"
-                x-text="language.language"
-              ></h3>
-
-              <div class="font-base py-5 pl-3">
-                <p>I want to leave it blank lol</p>
-              </div>
-
-              <div class="m-auto h-7 w-11/12 bg-gray-500">
-                <div
-                  class="h-full w-4/5 bg-teal-700"
-                  :style="'width:' + language.percentage"
-                ></div>
-              </div>
-
-              <div class="m-auto flex items-center py-4 pb-9 pl-3 text-center">
-                <p
-                  class="text-2xl font-bold text-slate-300"
-                  x-text="language.hours"
-                ></p>
-                <p class="pl-1 text-2xl font-bold text-slate-300">h</p>
-                <p class="pl-1 text-slate-500">/1000h</p>
-              </div>
+    <!-- Skills -->
+        <section id="skills" x-data="$skills" x-init="load()" class="px-4 text-slate-300 lg:px-8">
+            <h2 class="flex items-center gap-4 py-4">
+                <span><span class="text-teal-400">03 </span>Skills </span>
+                <span class="flex-grow border-spacing-3 border-t-2 border-dotted border-teal-400"></span>
+            </h2>
+            <div class="flex flex-col flex-wrap items-center gap-4 pb-8 md:flex-row">
+                <!-- card -->
+                <template x-for="language in languages">
+                    <div
+                        class="flex h-[25rem] w-[20rem] flex-col justify-between rounded border border-teal-800 bg-slate-900 px-4 py-8 shadow-md shadow-teal-800"
+                    >
+                        <div class="flex flex-col gap-4">
+                            <img :src="language.image" alt="CSS Logo" class="h-12 w-12" />
+                            <h3 class="text-2xl text-slate-100" x-text="language.name">Language name</h3>
+                            <p class="text-sm" x-text="language.description">description</p>
+                        </div>
+                        <div class="flex flex-col gap-4 pt-8">
+                            <div class="h-8 bg-slate-700">
+                                <div class="h-8 bg-teal-700" :style="`width:${progress(language)}`"></div>
+                            </div>
+                            <div class="flex flex-row items-center">
+                                <!-- <span class="text-4xl" x-text="language.hours">40h</span><span class="text-slate-500">/1,000</span> -->
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
-          </div>
-        </template>
-      </div>
-    </section>
+        </section>
 
     <section
       id="experience"
