@@ -15,85 +15,63 @@
   </head>
 
   <body class="bg-slate-800 font-mono text-slate-300">
-        <!-- Navbar-->
-        <nav x-data="$navbar" class="w-full">
-            <!-- Mobile Navbar -->
-            <div class="h-20 items-center bg-slate-800 px-4 lg:hidden">
-                <div class="flex h-full items-center justify-between">
-                    <span class="text-lg text-teal-400">./angelachen</span>
-                    <button @click="open = !open" class="text-slate-300">
-                        <svg
-                            x-show="!open"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="h-8 w-8"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <svg
-                            x-show="open"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="h-8 w-8"
-                        >
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <ul
-                    x-show="open"
-                    x-transition:enter="transition ease-out duration-100"
-                    x-transition:enter-start="transform opacity-0 scale-95"
-                    x-transition:enter-end="transform opacity-100 scale-100"
-                    x-transition:leave="transition ease-in duration-75"
-                    x-transition:leave-start="transform opacity-100 scale-100"
-                    x-transition:leave-end="transform opacity-0 scale-95"
-                    class="absolute right-0 left-0 bg-slate-800 text-sm"
-                >
-                    <template x-for="(entry, i) in entries">
-                        <li class="w-full">
-                            <a
-                                x-bind:href="entry.targetSection"
-                                class="block whitespace-nowrap p-4 focus-within:bg-slate-900 hover:bg-slate-900 hover:text-slate-200 active:text-slate-400"
-                            >
-                                <span class="text-teal-400" x-text="'0' + (i + 1) + '. '">01.</span>
-                                <span x-text="entry.name"></span>
-                            </a>
-                        </li>
-                    </template>
-                </ul>
+    
+          <!--NavBar-->
+        <!--mobile version-->
+        <nav x-data="angelaNavbar()" class="h20 block px-4 font-mono lg:hidden">
+            <div class="flex h-full items-center justify-between">
+                <span class="text-lg text-teal-400"><mark>.Angela</mark></span>
+                <button class="text-slate-300" @click="open=!open">
+                    <!--Sandwich button before click-->
+                    <svg
+                        x-show="!open"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-8 w-8"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <!--sandwich button after click-->
+                    <svg
+                        x-show="open"
+                        xmlns="http://www.w3.org/TR/SVG2/"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="h-8 w-8"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <!---desktop navbar-->
-            <div class="hidden h-20 items-center justify-between bg-slate-800 px-10 lg:flex">
-                <span class="text-lg text-teal-400">./angelachen</span>
-                <ul class="flex space-x-8 text-sm">
-                    <template x-for="(entry, i) in entries">
-                        <li>
-                            <a
-                                x-bind:href="entry.targetSection"
-                                class="group relative inline-flex flex-col whitespace-nowrap text-slate-300 outline-none hover:text-slate-200 active:text-slate-400"
-                            >
-                                <span>
-                                    <span class="text-teal-400 group-hover:text-teal-300 group-active:text-teal-500" x-text="'0' + (i + 1) + '. '"
-                                        >01.</span
-                                    >
-                                    <span x-text="entry.name"></span>
-                                </span>
-                                <span
-                                    class="ease absolute bottom-0 h-1 w-0 scale-x-100 border-b-2 border-teal-400 transition-width duration-100 group-focus:w-full"
-                                ></span>
-                            </a>
-                        </li>
-                    </template>
-                </ul>
-            </div>
+            <!--menu item in the navbar-->
+            <ul x-show="open" @click.away="open=false" class="absolute left-0 right-0 bg-slate-800 text-sm">
+                <template x-for="e in entries">
+                    <li class="block w-full">
+                        <a class="block w-full p-4 text-slate-300 hover:bg-slate-900 hover:text-slate-400" :href="e.clink">
+                            <span class="text-teal-400" x-html="e.prefix"></span><span x-html="e.label"></span>
+                        </a>
+                    </li>
+                </template>
+            </ul>
         </nav>
+        <!--desktop version-->
+        <nav class="sticky top-0 z-30 hidden h-20 w-full items-center justify-between bg-slate-800 px-10 font-mono lg:flex">
+            <span class="text-lg text-teal-400"><mark>.Angela</mark></span>
+            <ul x-data="angelaNavbar" class="flex space-x-8 text-sm">
+                <template x-for="e in entries">
+                    <li>
+                        <a class="text-slate-300 hover:text-slate-200 active:text-slate-400" :href="e.link"
+                            ><span class="text-teal-400" x-html="e.prefix"></span><span x-html="e.label"></span
+                        ></a>
+                    </li>
+                </template>
+            </ul>
+           </nav>         
       
 
     <div class="md:hidden">
